@@ -4,16 +4,16 @@ This repository is about getting access to your Dabbsson DBS2300 and Dabbsson DB
 
 ## Why?
 
-From my point of view, the DBS2300 is a good product. The only disadvantage is that only the official app can be used for communication.
+From my point of view, the DBS2300 and DBS3000B are good products and I am very happy. The only disadvantage is that only the official app can be used for communication.
 
-Using the powerstation just with the Dabbsson app (pressing stupid buttons) is not what I needed. I wanted to automate switching the power outputs according to the current input and battery load.
+Using the powerstation just with the Dabbsson app (pressing stupid buttons) is not what I needed. I wanted to automate switching the power outputs according to the current inputs and battery state of charge.
 
 In addition to that I don´t want my devices "calling home". That was something I observed while I did my first investigations using Wireshark. Unfortunately all traffic was encrypted.
 
 
 ## Setup
 
-Therefore after getting control (see "What to do?") I am using a Raspberry Pi Zero W to control the powerstation. The Rpi creates an WiFi Access Point to which the DBS2300 connects. The Rpi does not provides internet access over the wifi interface. The Rpi is connected to my network and provides a HTTP-server to access the data or to control the device.
+Therefore after getting control (see "What to do?") I am using a Raspberry Pi Zero W to control the powerstation. The Rpi creates an WiFi Access Point to which the DBS2300 connects. The Rpi does not provide internet access over the wifi interface. The Rpi is connected over a usb-to-ethernet-adapter to my home network and provides a HTTP-server to access the data or to control the device.
 
 ## What to do?
 
