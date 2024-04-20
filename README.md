@@ -4,21 +4,21 @@ This repository is about getting access to your Dabbsson DBS2300 and Dabbsson DB
 
 ## Why?
 
-From my point of view, the DBS2300 and DBS3000B are good products and I am very happy. The only disadvantage is that only the official app can be used for communication.
+From my point of view, the DBS2300 and DBS3000B are good products and I am very happy them. The only disadvantage is that only the official app can be used for communication.
 
 Using the powerstation just with the Dabbsson app (pressing stupid buttons) is not what I needed. I wanted to automate switching the power outputs according to the current inputs and battery state of charge.
 
-In addition to that I don´t want my devices "calling home". That was something I observed while I did my first investigations using Wireshark. Unfortunately all traffic was encrypted.
+In addition to that I don´t want my devices "calling home". That was something I observed while I did my first investigations using Wireshark. Unfortunately all traffic was encrypted and therefore not helpful.
 
 
 ## Setup
 
-Therefore after getting control (see "What to do?") I am using a Raspberry Pi Zero W to control the powerstation. The Rpi creates an WiFi Access Point to which the DBS2300 connects. The Rpi does not provide internet access over the wifi interface. The Rpi is connected over a usb-to-ethernet-adapter to my home network and provides a HTTP-server to access the data or to control the device.
+After getting control (see "What to do?") I was using a Raspberry Pi Zero W to control the powerstation. The Rpi creates an WiFi Access Point to which the DBS2300 connects. The Rpi does not provide internet access over the wifi interface. The Rpi is connected over a usb-to-ethernet-adapter to my home network and provides a HTTP-server to access the data or to control the device. You do not need to do this. You just can connect the DBS2300 directly to your network. 
 
 ## What to do?
 
-After a while I figured out that the DBS2300 is using [Tuya](https://en.tuya.com/). 
-To do the first steps you can follow the instructions of [TinyTuya](https://github.com/jasonacox/tinytuya/tree/master). Basically getting an developer [Account] (https://developer.tuya.com/en/) and connect your DBS2300 with the official Tuya Smart app to generate a local key and get the device id. Without a local key, you can no communicate with your device. 
+After a while with Wireshark I figured out that the DBS2300 is using [Tuya](https://en.tuya.com/). 
+To do the first steps you can follow the instructions of [TinyTuya](https://github.com/jasonacox/tinytuya/tree/master). Basically getting an developers [Account](https://developer.tuya.com/en/) and connect your DBS2300 with the official Tuya Smart app to generate a local key and get the device id. Without a local key, you can no communicate with your device. You do not need the official Tuya app afterwards. But you need it to get the key.
 
 
 Be aware the official Dabbsson app will not work anymore after that! I haven´t tried to go back to the official app. All you do is at your own risk!
@@ -27,13 +27,13 @@ You can use [TinyTuya](https://github.com/jasonacox/tinytuya/tree/master) to con
 
 
 Example data from the DBS2300 looks like this:
-```json
+```python
 {'protocol': 4, 't': 63848, 'data': {'dps': {'156': 'zQAAAADOAAAAANAAAAAA0QAAAADcExwhAN0AAAAB3gAAABs='}}}
 
 {'protocol': 4, 't': 63848, 'data': {'dps': {'1': 9, '2': 4761, '10': 19, '103': 0, '104': 0, '105': 0, '106': 0, '110': 0, '108': 0, '138': 25, '139': 0}}, 'dps': {'1': 9, '2': 4761, '10': 19, '103': 0, '104': 0, '105': 0, '106': 0, '110': 0, '108': 0, '138': 25, '139': 0}}
 
 ```
-Example key-value pairs
+Example key-value pairs (there are more)
 
 | key | value |
 |-----|-------|
@@ -45,6 +45,7 @@ Example key-value pairs
 | 109 |   AC-Out on/off    |
 | 111 |   5V-Out on/off     |
 | 112 |   12V-Out on/off     |
+| 123 |   A/C input power     |
 | 138 |   State of charge DBS3000B in %     |
 | 156 |   Base64 encoded information of DBS3000B (including keys 205, 206, 208, 209, 220, 221, 222) |
 
